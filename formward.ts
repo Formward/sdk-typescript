@@ -5,7 +5,7 @@ export interface FormwardClientOptions { apiKey: string; baseUrl?: string }
 export class FormwardClient {
   private base: string;
   constructor(private opts: FormwardClientOptions) {
-    this.base = (opts.baseUrl ?? "https://app.formward.eu").replace(/\/+$/, "");
+    this.base = (opts.baseUrl ?? "https://formward.eu").replace(/\/+$/, "");
   }
   private async get<T>(path: string, query?: Record<string, string>): Promise<T> {
     const url = new URL(this.base + path);
