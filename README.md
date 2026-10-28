@@ -22,7 +22,7 @@ const recent = await client.listSubmissions(form.id, { since: "2026-10-01T00:00:
 
 API keys are created in the Formward dashboard under API keys and are sent as `Authorization: Bearer <key>`. Keys carry per-key scopes; reading submissions requires the Professional plan. The full endpoint reference is at [formward.eu/docs/api](https://formward.eu/docs/api).
 
-`baseUrl` defaults to `https://app.formward.eu` and can be overridden for testing.
+`baseUrl` defaults to `https://formward.eu` and can be overridden for testing.
 
 ## Errors
 

@@ -5,7 +5,7 @@ export interface FormwardClientOptions { apiKey: string; baseUrl?: string }
 export class FormwardClient {
   private base: string;
   constructor(private opts: FormwardClientOptions) {
-    this.base = (opts.baseUrl ?? "https://app.formward.eu").replace(/\/+$/, "");
+    this.base = (opts.baseUrl ?? "https://formward.eu").replace(/\/+$/, "");
   }
   private async get<T>(path: string, query?: Record<string, string>): Promise<T> {
     const url = new URL(this.base + path);
@@ -15,8 +15,8 @@ export class FormwardClient {
     return (await res.json()).data as T;
   }
   listForms() { return this.get<Array<{ id: string; name: string }>>("/api/v1/forms"); }
-  getForm(id: string) { return this.get<{ id: string; name: string }>(`/api/v1/forms/${id}`); }
+  getForm(id: string) { return this.get<{ id: string; name: string }>(`/api/v1/forms/${encodeURIComponent(id)}`); }
   listSubmissions(formId: string, opts?: { since?: string }) {
-    return this.get<unknown[]>(`/api/v1/forms/${formId}/submissions`, opts?.since ? { since: opts.since } : undefined);
+    return this.get<unknown[]>(`/api/v1/forms/${encodeURIComponent(formId)}/submissions`, opts?.since ? { since: opts.since } : undefined);
   }
 }
